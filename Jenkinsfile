@@ -16,16 +16,15 @@ pipeline {
 
         stage('2. Environment & Dependency Setup') {
             steps {
-                echo 'Installing required Python packages from requirements.txt...'
-                bat 'pip install --upgrade pip'
-                bat 'pip install -r requirements.txt'
+                echo 'Verifying and installing dependencies...'
+                bat 'python -m pip install -r requirements.txt'
             }
         }
 
         stage('3. Automated Testing (PyTest)') {
             steps {
                 echo 'Executing Unit and Integration Tests...'
-                bat 'pytest tests/ --junitxml=test-results.xml -v'
+                bat 'python -m pytest tests/ --junitxml=test-results.xml -v'
             }
         }
 
